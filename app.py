@@ -38,5 +38,19 @@ def loadTextFromFile( name ):
                                                                                 
     return textProcessed
 
+
+def encodeText( text ):
+    textEncode = []
+    for c in text:
+        textEncode.append( characterToOneHotVector( c ))
+    return textEncode
+
+
+
+
+
 text = loadTextFromFile( "data/Bacteria in Daily Life.txt" )
-print( text )
+print( text[:1000] )
+text = encodeText( text )
+print( text[:10] )
+
