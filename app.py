@@ -58,10 +58,34 @@ def train( X ):
         optimizer.step()
     return loss.item()
 
-epochs = 100
+epochs = 10
 
 for i in range( epochs ):
     loss_value = train( text )
     if  i % 1 == 0:
         print( f"epoch {i} Loss {loss_value}" )
+
+
+#model.load_state_dict( torch.load( "models/rnn_word_prediction" ))
+
+textTest = encodeText("a")
+model.eval()  #trash clearing
+future = 15
+h = model.init_hidden()
+x = torch.Tensor( [textTest[0]])
+print( oneHotVectorToCharacter( x ), " -> " )
+
+for i in range( future ):
+    yp, x = model( x , h )
+    x = yp
+    c = oneHotVectorToCharacter(yp) 
+    print( c )
+    if c == " ":
+        break
+    textTest = encodeText( c )
+    x = torch.Tensor([textTest[0]])
+
+
+
+
 
