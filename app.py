@@ -30,3 +30,13 @@ print( f"first letter of the text in Torch tensor format >>>\n{X}" )
 H = model.init_hidden() # initialisation a hidden neuron with zerros
 print( f"X.shape alphabet len >>>   {X.shape} >>> 27"   )
 print( f"H.shape alphabet*4 len >>> {H.shape} >>> 27*4 = 108" )
+
+Y, H = model( X, H )
+print( "Data after model >>>" )
+print( f"Y.shape alphabet len >>>   {Y.shape} >>> 27"   )
+print( f"H.shape alphabet*4 len >>> {H.shape} >>> 27*4 = 108" )
+print( f"Y torch tensor -> X, H after model(X, H) >>>\n{Y}" )
+print()
+print( f"H torch tensor after model(X, H) >>>\n{H}" )
+
+
