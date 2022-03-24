@@ -1,6 +1,7 @@
 #module helper_func
 
 import re
+import torch, torch.nn as nn
 from data import *
 
 def characterToOneHotVector( character ):

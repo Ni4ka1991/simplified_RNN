@@ -39,4 +39,29 @@ print( f"Y torch tensor -> X, H after model(X, H) >>>\n{Y}" )
 print()
 print( f"H torch tensor after model(X, H) >>>\n{H}" )
 
+def train( X ):
+    h = model.init_hidden()
+    model.zero_grad()
+    print( f"len(X) >>> {len( X )}" )
+    for i in range( len(X) - 1 ):
+        x = torch.Tensor( [X[i]] )
+        y = torch.Tensor( [X[i+1]] )
+        if i == 0 or oneHotVectorToCharacter(x) == " ":
+            h = model.init_hidden()
+    
+        optimizer.zero_grad()
+        h = h.detach() #([[-3.2002, -3.3569, -3.2780, -3.3148, -3.1958, -3.2348, -3.1634, -3.2344]], grad_fn=<LogSoftmaxBackward0>)   :  detach >>> grad_fn=<LogSoftmaxBackward0>
+        yp, h = model( x, h )
+#        print( f"yp = {yp}" )
+        loss = criterion( yp, y )
+        loss.backward()
+        optimizer.step()
+    return loss.item()
+
+epochs = 100
+
+for i in range( epochs ):
+    loss_value = train( text )
+    if  i % 1 == 0:
+        print( f"epoch {i} Loss {loss_value}" )
 
